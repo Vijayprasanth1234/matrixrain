@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+     
+        .cloud {
+            position: relative;
+            width: 300px;
+            height: 400px;
+            background-color: black;
+            margin: 200px auto;
+            border-radius: 50px;
+            overflow: hidden; /* Ensure drops don't overflow the cloud */
+        }
+
+        .drop {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 1; /* Start fully visible */
+            animation: rain 1s linear forwards;
+            top: -20px; /* Start just above the cloud */
+        }
+
+        @keyframes rain {
+            0% {
+                opacity: 1;
+                top: -20px; /* Start from above the cloud */
+            }
+            100% {
+                opacity: 0;
+                top: 100%; /* Move down to the bottom of the cloud */
+            }
+        }
+        img{
+            
+            margin-top: -200px;
+            width: 400px;
+           margin-left: -100px;
+        }
+        .vij{
+            margin-left: 300px;
+        }
+    </style>
+</head>
+<body class="cloud">
+    
+    <div class="container">
+        <div class="megham">
+            <img src="./images (1).jpeg" alt="">
+          
+            <h2></h2>
+        </div>
+    </div>
+    <script>
+        function randomtext() {
+            let text = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-={}[]|;':\",./<>?";
+            let letters = text[Math.floor(Math.random() * text.length)];
+            return letters;
+        }
+
+      function rain() {
+    let cloud = document.querySelector('.cloud');
+    let drop = document.createElement('div');
+    drop.classList.add('drop');
+    cloud.appendChild(drop);
+
+    // Set initial position and size of the drop
+    let left = Math.floor(Math.random() * 300);
+    let size = Math.random() * 1.5;
+    let duration = Math.random() * 2 + 1; // Ensure duration is at least 1 second
+
+    // Generate a random color
+    let r = Math.floor(Math.random() * 256);
+    let g = Math.floor(Math.random() * 256);
+    let b = Math.floor(Math.random() * 256);
+    let color = `rgb(${r}, ${g}, ${b})`;
+
+    // Style the drop
+    drop.innerText = randomtext();
+    drop.style.left = left + 'px';
+    drop.style.fontSize = 38.5 + size + 'px';
+    drop.style.color = color; // Apply the random color
+    drop.style.animationDuration = duration + 's';
+
+    // Remove the drop after animation is complete
+    setTimeout(() => {
+        drop.remove();
+    }, duration * 1000);
+}
+
+setInterval(function () {
+    rain();
+}, 120);
+    </script>
+</body>
+</html>
